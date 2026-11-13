@@ -1,0 +1,24 @@
+# Gradle
+.gradle/
+build/
+app/build/
+**/build/
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Машинозависимые пути (путь к SDK) — не коммитим
+local.properties
+
+# Логи и временные файлы
+*.log
+*.swp
+*~
+
+# Keystore и секреты (на всякий случай)
+*.jks
+*.keystore
