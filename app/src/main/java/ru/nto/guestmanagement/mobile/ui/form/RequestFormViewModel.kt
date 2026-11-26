@@ -182,6 +182,7 @@ class RequestFormViewModel(
 
     fun submit(onCreated: () -> Unit, onSessionExpired: () -> Unit) {
         if (loading) return
+        serverErrors = emptyMap()
         attempted = true
         commonError = null
         if (hasClientErrors()) return

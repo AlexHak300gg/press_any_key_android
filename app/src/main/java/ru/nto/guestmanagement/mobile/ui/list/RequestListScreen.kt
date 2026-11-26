@@ -1,6 +1,7 @@
 package ru.nto.guestmanagement.mobile.ui.list
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
@@ -27,8 +28,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.onClick
-import androidx.compose.ui.semantics.semantics
+
+
 import androidx.compose.ui.unit.dp
 import ru.nto.guestmanagement.mobile.R
 import ru.nto.guestmanagement.mobile.data.RequestStatus
@@ -41,7 +42,7 @@ import ru.nto.guestmanagement.mobile.ui.common.StatusLabel
 import ru.nto.guestmanagement.mobile.ui.common.containerViewModel
 import ru.nto.guestmanagement.mobile.ui.refresh.ResumeEffect
 
-private data class FilterOption(val tag: String, val label: String, val status: RequestStatus?)
+data class FilterOption(val tag: String, val label: String, val status: RequestStatus?)
 
 @Composable
 private fun filterOptions() = listOf(
@@ -220,12 +221,11 @@ private fun RequestCard(
             .testTag(TestIds.requestsPos(index))
             // Собственное onClick-действие в семантике вместо clickable:
             // семантика потомков не сливается, вложенные теги остаются доступны тестам.
-            .semantics {
-                onClick(label = "Открыть заявку") {
-                    onOpenDetails(item.id)
-                    true
-                }
-            },
+            .clickable(
+                enabled = true,
+                onClickLabel = "request_card",
+                onClick = { onOpenDetails(item.id) }
+            ),
     ) {
         Column(
             modifier = Modifier
